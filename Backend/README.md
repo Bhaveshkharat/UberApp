@@ -89,3 +89,84 @@ curl -X POST http://localhost:3000/users/registers \
   - `email` (string): User's email address (must be a valid email).
   - `password` (string): User's password (minimum 6 characters).
 - `token` (String): JWT Token
+
+
+
+### POST /users/logins
+
+#### Description
+This endpoint is used to log in an existing user.
+
+#### Request Body
+The request body must be a JSON object containing the following fields:
+- `email`: A string with a valid email format (required)
+- `password`: A string with a minimum length of 6 characters (required)
+
+Example:
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+#### Responses
+
+- **200 OK**
+  - Description: User logged in successfully.
+  - Body:
+    ```json
+    {
+      "token": "jwt_token",
+      "user": {
+        "_id": "user_id",
+        "fullname": {
+          "firstname": "John",
+          "lastname": "Doe"
+        },
+        "email": "john.doe@example.com"
+      }
+    }
+    ```
+
+- **401 Unauthorized**
+  - Description: Invalid email or password.
+  - Body:
+    ```json
+    {
+      "message": "Invalid email or password"
+    }
+    ```
+
+- **400 Bad Request**
+  - Description: Validation error.
+  - Body:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Error message",
+          "param": "field_name",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+#### Example Request
+```bash
+curl -X POST http://localhost:3000/users/logins \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}'
+```
+
+#### Example Response
+- `user` (object):
+  - `fullname` (object).
+    - `firstname` (string): User's first name.
+    - `lastname` (string): User's last name.   
+  - `email` (string): User's email address.
+- `token` (String): JWT Token
