@@ -170,3 +170,88 @@ curl -X POST http://localhost:3000/users/logins \
     - `lastname` (string): User's last name.   
   - `email` (string): User's email address.
 - `token` (String): JWT Token
+
+### GET /users/profiles
+
+#### Description
+This endpoint is used to get the profile of the logged-in user.
+
+#### Headers
+- `Authorization`: Bearer token (required)
+
+#### Responses
+
+- **200 OK**
+  - Description: User profile retrieved successfully.
+  - Body:
+    ```json
+    {
+      "_id": "user_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com"
+    }
+    ```
+
+- **401 Unauthorized**
+  - Description: Unauthorized access.
+  - Body:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Example Request
+```bash
+curl -X GET http://localhost:3000/users/profiles \
+-H "Authorization: Bearer jwt_token"
+```
+
+#### Example Response
+- `user` (object):
+  - `fullname` (object).
+    - `firstname` (string): User's first name.
+    - `lastname` (string): User's last name.   
+  - `email` (string): User's email address.
+
+
+
+### GET /users/logouts
+
+#### Description
+This endpoint is used to log out the logged-in user.
+
+#### Headers
+- `Authorization`: Bearer token (required)
+
+#### Responses
+
+- **200 OK**
+  - Description: User logged out successfully.
+  - Body:
+    ```json
+    {
+      "message": "Logged out"
+    }
+    ```
+
+- **401 Unauthorized**
+  - Description: Unauthorized access.
+  - Body:
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+#### Example Request
+```bash
+curl -X GET http://localhost:3000/users/logouts \
+-H "Authorization: Bearer jwt_token"
+```
+
+#### Example Response
+- `message` (string): "Logged out"
