@@ -90,7 +90,116 @@ curl -X POST http://localhost:3000/users/registers \
   - `password` (string): User's password (minimum 6 characters).
 - `token` (String): JWT Token
 
+### POST /captains/registers
 
+#### Description
+This endpoint is used to register a new captain.
+
+#### Request Body
+The request body must be a JSON object containing the following fields:
+- `fullname`: An object containing:
+  - `firstname`: A string with a minimum length of 3 characters (required)
+  - `lastname`: A string with a minimum length of 3 characters (optional)
+- `email`: A string with a valid email format and a minimum length of 5 characters (required)
+- `password`: A string with a minimum length of 6 characters (required)
+- `vehicle`: An object containing:
+  - `color`: A string with a minimum length of 3 characters (required)
+  - `plate`: A string with a minimum length of 3 characters (required)
+  - `capacity`: An integer with a minimum value of 1 (required)
+  - `vehicleType`: A string that must be one of 'car', 'motorcycle', or 'auto' (required)
+
+Example:
+```json
+{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+#### Responses
+
+- **200 OK**
+  - Description: Captain registered successfully.
+  - Body:
+    ```json
+    {
+      "_id": "captain_id",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com",
+      "vehicle": {
+        "color": "red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      }
+    }
+    ```
+
+- **400 Bad Request**
+  - Description: Validation error or captain already exists.
+  - Body:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Error message",
+          "param": "field_name",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+    or
+    ```json
+    {
+      "message": "Captain already exists"
+    }
+    ```
+
+#### Example Request
+```bash
+curl -X POST http://localhost:3000/captains/registers \
+-H "Content-Type: application/json" \
+-d '{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}'
+```
+
+#### Example Response
+- `captain` (object):
+  - `fullname` (object).
+    - `firstname` (string): Captain's first name (minimum 3 characters).
+    - `lastname` (string): Captain's last name (minimum 3 characters).   
+  - `email` (string): Captain's email address (must be a valid email).
+  - `vehicle` (object):
+    - `color` (string): Vehicle color (minimum 3 characters).
+    - `plate` (string): Vehicle plate (minimum 3 characters).
+    - `capacity` (integer): Vehicle capacity (minimum 1).
+    - `vehicleType` (string): Vehicle type (must be one of 'car', 'motorcycle', or 'auto').
 
 ### POST /users/logins
 
@@ -216,8 +325,6 @@ curl -X GET http://localhost:3000/users/profiles \
     - `firstname` (string): User's first name.
     - `lastname` (string): User's last name.   
   - `email` (string): User's email address.
-
-
 
 ### GET /users/logouts
 
