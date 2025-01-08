@@ -18,5 +18,15 @@ router.post('/registers', [
 )
 
 
+router.post('/logins', [
+    body('email').isEmail().withMessage('Invalid Email'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+],
+    captainController.loginCaptain
+)
+
+router.get('/profiles', authMiddleware.authCaptain, captainController.getCaptainProfile)
+
+router.get('/logouts', authMiddleware.authCaptain, captainController.logoutCaptain)
 
 module.exports = router;
