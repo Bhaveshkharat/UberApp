@@ -16,6 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use('/users', userRoutes);
+
+
 app.use('/captains', captainRoutes);
 
 app.get('/',(req,res)=>{

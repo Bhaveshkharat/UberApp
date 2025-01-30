@@ -7,9 +7,9 @@ const UserContext = ({ children }) => {
 
     const [ user, setUser ] = useState({
         email: '',
-        fullName: {
-            firstName: '',
-            lastName: ''
+        fullname: {
+            firstname: '',
+            lastname: ''
         }
     })
 
@@ -23,4 +23,3 @@ const UserContext = ({ children }) => {
 }
 
 export default UserContext
-
