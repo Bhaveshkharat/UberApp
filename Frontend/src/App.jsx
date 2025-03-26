@@ -6,11 +6,12 @@ import UserSignup from './pages/UserSignup'
 import CaptainLogin from './pages/CaptainLogin'
 import CaptainSigup from './pages/CaptainSigup'
 import Home from './pages/Home'
-import { UserDataContext } from './context/userContext'
 import UserProtectWrapper from './pages/UserProtectWrapper'
 import UserLogout from './pages/UserLogout'
 import CaptainHome from './pages/CaptainHome'
 import CaptainProtectWrapper from './pages/CaptainProtectWrapper'
+import Riding from './pages/Riding'
+import CaptainRiding from './pages/CaptainRiding'
 
 
 const App = () => {
@@ -20,6 +21,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Start />} />
         <Route path="/logins" element={<UserLogin />} />
+        <Route path="/riding" element={<Riding />} />
+        <Route path="/captain-riding" element={<CaptainRiding />} />
         <Route path="/signups" element={<UserSignup />} />
         <Route path="/captain-logins" element={<CaptainLogin />} />
         <Route path="/captain-signups" element={<CaptainSigup />} />

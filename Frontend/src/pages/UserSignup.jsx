@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { UserDataContext } from '../context/userContext.jsx'
+import { UserDataContext } from '../context/UserContext.jsx'
 
 
 
@@ -111,7 +111,7 @@ const UserSignup = () => {
             >Create account</button>
 
           </form>
-          <p className='text-center'>Already have a account? <Link to='/login' className='text-blue-600'>Login here</Link></p>
+          <p className='text-center'>Already have a account? <Link to='/logins' className='text-blue-600'>Login here</Link></p>
         </div>
         <div>
           <p className='text-[10px] leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
